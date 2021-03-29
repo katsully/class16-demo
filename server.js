@@ -33,7 +33,7 @@ function newConnection(socket){
 
     socket.on('circle', mouseMsg);
     socket.on('emoji', emojiMsg);
-    socket.on('shape', shapeMsg);
+    socket.on('clear', clearMsg);
 
 
     function mouseMsg(data){

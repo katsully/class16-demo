@@ -29,7 +29,7 @@ function setup() {
   // handle the broadcast calls coming from the server
   socket.on('circle', newCircleDrawing);
   socket.on('emoji', newEmojiDrawing);
-  socket.on('shape', newShape);
+  socket.on('clear', clearDrawing);
 
 
   circleSize = 25;
@@ -58,8 +58,8 @@ function makeNormal(){
   circleSize = 25;
 }
 
-function newShape(){
-  background()
+function clearDrawing(){
+  background('red');
 }
 
 function newCircleDrawing(data){
@@ -73,12 +73,12 @@ function newEmojiDrawing(data){
   }
 }
 
-// function keyPressed(){
+function keyPressed(){
 
   
-//   socket.emit('clear', data);
+  socket.emit('clear');
 
-// }
+}
 
 function draw() {
   // for(var i=0; i<shapes.size(); i++){
