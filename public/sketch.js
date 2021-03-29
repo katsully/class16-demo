@@ -22,7 +22,7 @@ function setup() {
   createCanvas(800, 800);
 
   // this connects the front end code to the socket communications
-  socket = io.connect('http://localhost:3000');
+  socket = io.connect('https://drawing-funtimes.herokuapp.com/');
   
   background('red');
 
