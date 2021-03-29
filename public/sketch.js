@@ -23,13 +23,18 @@ function setup() {
 
   // this connects the front end code to the socket communications
   socket = io.connect('https://drawing-funtimes.herokuapp.com/');
+
+  // socket = io.connect('http://localhost:3000')
   
   background('red');
 
   // handle the broadcast calls coming from the server
   socket.on('circle', newCircleDrawing);
   socket.on('emoji', newEmojiDrawing);
-  socket.on('clear', clearDrawing);
+  socket.on('clear', function(){
+    console.log("in clear");
+    background('red');
+  });
 
 
   circleSize = 25;
@@ -59,6 +64,7 @@ function makeNormal(){
 }
 
 function clearDrawing(){
+  console.log("we here");
   background('red');
 }
 
@@ -71,13 +77,6 @@ function newEmojiDrawing(data){
   if(data.img == 1){
     image(emoji1, data.x, data.y, 50, 50);
   }
-}
-
-function keyPressed(){
-
-  
-  socket.emit('clear');
-
 }
 
 function draw() {
