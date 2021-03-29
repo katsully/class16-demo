@@ -3,7 +3,7 @@
 
 var socket;
 
-var buttonSmall, buttonLarge, buttonNormal;
+var buttonSmall, buttonLarge, buttonNormal, buttonClear;
 var circleSize;
 
 var emoji1;
@@ -40,10 +40,12 @@ function setup() {
   buttonSmall = select('#smaller');
   buttonLarge = select('#larger');
   buttonNormal = select('#normal');
+  buttonClear = select("#clear");
 
   buttonSmall.mousePressed( makeSmaller );
   buttonLarge.mousePressed( makeLarger );
   buttonNormal.mousePressed( makeNormal );
+  buttonClear.mousePressed( clearIt );
 
   colorMode(HSB);
 
@@ -60,6 +62,15 @@ function makeLarger(){
 
 function makeNormal(){
   circleSize = 25;
+}
+
+function clearIt(){
+  // clear background for MY browser
+  background('red');
+
+  // tell all the other browsers (ie the other clients)
+  // to clear their screens
+  socket.emit('clear');
 }
 
 function newCircleDrawing(data){
@@ -106,18 +117,5 @@ function mouseClicked(){
   };
 
   socket.emit('emoji', data);
-}
-
-function keyPressed(){
-  if(keyCode == DELETE){
-    // clear background for MY browser
-    background('red');
-
-    // tell all the other browsers (ie the other clients)
-    // to clear their screens
-
-    socket.emit('clear');
-
-  }
 }
 
