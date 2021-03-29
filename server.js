@@ -33,6 +33,7 @@ function newConnection(socket){
 
     socket.on('circle', mouseMsg);
     socket.on('emoji', emojiMsg);
+    socket.on('clear', clearMsg);
 
 
     function mouseMsg(data){
@@ -43,6 +44,12 @@ function newConnection(socket){
     function emojiMsg(data){
         // console.log(data);
         socket.broadcast.emit('emoji', data);
+    }
+
+    function clearMsg(){
+        // broadcast sends to every browser (ie client)
+        // expect the browser that sent the message
+        socket.broadcast.emit('clear');
     }
 
 

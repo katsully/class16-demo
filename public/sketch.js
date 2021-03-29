@@ -32,7 +32,6 @@ function setup() {
   socket.on('circle', newCircleDrawing);
   socket.on('emoji', newEmojiDrawing);
   socket.on('clear', function(){
-    console.log("in clear");
     background('red');
   });
 
@@ -61,11 +60,6 @@ function makeLarger(){
 
 function makeNormal(){
   circleSize = 25;
-}
-
-function clearDrawing(){
-  console.log("we here");
-  background('red');
 }
 
 function newCircleDrawing(data){
@@ -112,5 +106,18 @@ function mouseClicked(){
   };
 
   socket.emit('emoji', data);
+}
+
+function keyPressed(){
+  if(keyCode == DELETE){
+    // clear background for MY browser
+    background('red');
+
+    // tell all the other browsers (ie the other clients)
+    // to clear their screens
+
+    socket.emit('clear');
+
+  }
 }
 
